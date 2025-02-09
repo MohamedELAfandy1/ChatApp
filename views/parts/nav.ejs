@@ -1,0 +1,106 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
+      <i class="bi bi-shop me-2"></i> ChatApp
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link <%=pageTitle === 'Home-Page' ? 'active' : '' %> fw-semibold"
+            aria-current="page"
+            href="/"
+          >
+            <i class="bi bi-house-door"></i> Home
+          </a>
+        </li>
+        <% if(isUser){ %> 
+        <input type="hidden" value="<%=isUser%>" id="userId" />
+        <li class="nav-item">
+          <a
+            class="nav-link <%=pageTitle === 'Profile-page' ? 'active' : '' %>"
+            href="/profile/"
+          >
+            <i class="bi bi-cart"></i> Profile
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link <%=pageTitle === 'Order-Page' ? 'active' : '' %>"
+            href="/order"
+          >
+            <i class="bi bi-receipt"></i> Friends
+          </a>
+        </li>
+        <li>
+          <% if (friendRequests && Array.isArray(friendRequests)) { %>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Friend Requests
+            </button>
+            <ul class="dropdown-menu">
+              <% if (friendRequests.length === 0) { %>
+              <li><p class="dropdown-item">No Friend Requests</p></li>
+              <% } else { %> <% for (let request of friendRequests) { %>
+              <li>
+                <a class="dropdown-item" href="/profile/<%= request.id %>">
+                  <%= request.name %>
+                </a>
+              </li>
+              <% } %> <% } %>
+            </ul>
+          </div>
+          <% } %>
+        </li>
+        <!-- Logout Form -->
+        <li class="nav-item">
+          <form
+            action="/logout"
+            method="POST"
+            class="d-flex align-items-center"
+          >
+            <input type="submit" class="btn btn-danger" value="Logout" />
+          </form>
+        </li>
+
+        <%}else{%>
+
+        <li class="nav-item">
+          <a
+            class="nav-link <%=pageTitle === 'Login-Page' ? 'active' : '' %>"
+            href="/login"
+          >
+            <i class="bi bi-box-arrow-in-right"></i> Login
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link <%=pageTitle === 'Register-Page' ? 'active' : '' %>"
+            href="/signUp"
+          >
+            <i class="bi bi-person-plus"></i> Sign Up
+          </a>
+        </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</nav>

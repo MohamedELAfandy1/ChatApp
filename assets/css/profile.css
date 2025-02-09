@@ -1,0 +1,94 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-container {
+  width: 60%;
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-title button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.profile-title button:hover {
+  background: #0056b3;
+}
+
+.friend-status {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.not-friend {
+  color: red;
+}
+
+.request-status {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #218838;
+}
+
+.profile-info {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.profile-info p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.profile-image img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+}
+
+.friends-list {
+  margin-top: 20px;
+}
+
+.friends-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.friends-list li {
+  background: #ddd;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}

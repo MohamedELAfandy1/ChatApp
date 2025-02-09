@@ -1,0 +1,72 @@
+<%- include('parts/header.ejs') %> <%- include('parts/nav.ejs') %>
+
+<link rel="stylesheet" href="/css/profile.css" />
+
+<div class="profile-container">
+  <form method="POST">
+    <input id="searchUserId"  type="hidden" name="searchUserId" value="<%=searchUser._id%>" />
+    <input id="searchUserName" type="hidden" name="searchUserName" value="<%=searchUser.name%>" />
+    <input id="searchUserImage" type="hidden" name="searchUserImage" value="<%=searchUser.image%>" />
+    <input id="loggedUserId"  type="hidden" name="loggedUserId" value="<%=loggedUser._id%>" />
+    <input id="loggedUserName" type="hidden" name="loggedUserName" value="<%=loggedUser.name%>" />
+    <input id="loggedUserImage" type="hidden" name="loggedUserImage" value="<%=loggedUser.image%>" />
+    <% if (isMe) { %>
+    <ul>
+      <h1>friend REQUESTS</h1>
+      <% loggedUser.friendRequests.forEach(friend => { %>
+      <li><a href="/profile/<%=friend.id%>"><%- friend.name %></a></li>
+      <% }); %>
+    </ul>
+    <h2 class="profile-title"><button>EDIT Profile</button></h2>
+
+    <% } else { %> <% if (isFriend) { %>
+    <h2 class="friend-status">MY FRIEND</h2>
+    <button>chat</button>
+    <input type="submit" formaction="/friend/deleteFriend" value="Delete" />
+    <% } else { %>
+    <h2 class="friend-status not-friend">NOT FRIEND</h2>
+    <% if (isRequest) { %>
+    <h2 class="request-status">RECEIVE REQUEST</h2>
+    <input type="submit" formaction="/friend/acceptRequest" value="Accept" />
+    <input type="submit" formaction="/friend/rejectRequest" value="Reject" />
+    <% } else if(isSend) { %>
+    <h2 class="request-status">SEND REQUEST</h2>
+    <input type="submit" formaction="/friend/cancelRequest" value="Cancel" />
+    <% } else { %>
+    <h2 class="request-status not-request">NOT REQUEST</h2>
+    <input
+      id="addFriendBtn"
+      type="submit"
+      value="Send Friend Request"
+
+      />
+      <!-- formaction="/friend/addFriend" -->
+    <input type="button" value="BLOCK" />
+    <% } %> <% } %> <% } %>
+  </form>
+  <div class="profile-info">
+    <p><strong>Name:</strong> <%- searchUser.name %></p>
+
+    <div class="profile-image">
+      <img src="/<%=searchUser.image%>" alt="Profile Picture" />
+    </div>
+
+    <div class="friends-list">
+      <h3>Friends:</h3>
+      <ul>
+        <% searchUser.friends.forEach(friend => { %>
+        <li><%- friend.name %></li>
+        <% }); %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<%- include('parts/footer.ejs') %>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/sockets/init.js"></script>
+<% if (!isMe && !isFriend){ %>
+  <script src="/js/sockets/friend.js"></script>
+<%}%>
+</body>
+</html>
